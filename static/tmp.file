@@ -1,0 +1,6 @@
+$def with (name)
+
+$if name:
+	I Just wanted to say <em>Hello</em> $name
+$else:
+	<em>Hello</em>,Webpy!
