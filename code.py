@@ -3,15 +3,15 @@
 
 import web
 
+render = web.template.render('tpl/')  # 定义渲染模版在项目中的位置
 
-render = web.template.render('tpl/') #定义渲染模版在项目中的位置
-
-db = web.database(dbn='mysql',user='tdo',pw='tdo',db='tdo') #创建数据对象，用于指定数据库类型，连接权限
+db = web.database(dbn='mysql', user='tdo', pw='tdo', db='tdo')  # 创建数据对象，用于指定数据库类型，连接权限
 
 urls = (
-	"/","index",
-	"/add","add"
-	)
+    "/", "index",
+    "/add", "add"
+)
+
 
 # class index(object):
 # 	"""docstring for index"""
@@ -29,22 +29,23 @@ urls = (
 # 		return render.index(name) #访问形式 http://127.0.0.1/shojinto 
 
 class index(object):
-	"""docstring for index"""
-	def GET(self):
-		tdos = db.select('tdo')
-		return render.index(tdos)
+    """docstring for index"""
+
+    def GET(self):
+        tdos = db.select('tdo')
+        return render.index(tdos)
+
 
 class add(object):
-	"""docstring for add"""
-	def POST(self):
-		i = web.input()  #web.input 保存的时候form提交过来的所有数据
-		n = db.insert('tdo',title=i.title)  # 其实这里可以不定义变量n 而直接执行db.insert()方法，该方法返回的是出入导数据后改行的行号
-		# return render.n(i)
-		raise web.seeother('/')
+    """docstring for add"""
+
+    def POST(self):
+        i = web.input()  # web.input 保存的时候form提交过来的所有数据
+        n = db.insert('tdo', title=i.title)  # 其实这里可以不定义变量n 而直接执行db.insert()方法，该方法返回的是出入导数据后改行的行号
+        # return render.n(i)
+        raise web.seeother('/')
 
 
-
-
-if __name__ == "__main__":  #启动web服务
-	app = web.application(urls,globals())
-	app.run()
+if __name__ == "__main__":  # 启动web服务
+    app = web.application(urls, globals())
+    app.run()
