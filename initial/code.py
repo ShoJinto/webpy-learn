@@ -32,7 +32,7 @@ class index(object):
     """docstring for index"""
 
     def GET(self):
-        tdos = db.select('tdo')
+        tdos = db.select('todo')
         return render.index(tdos)
 
 
@@ -41,7 +41,7 @@ class add(object):
 
     def POST(self):
         i = web.input()  # web.input 保存的时候form提交过来的所有数据
-        n = db.insert('tdo', title=i.title)  # 其实这里可以不定义变量n 而直接执行db.insert()方法，该方法返回的是出入导数据后改行的行号
+        n = db.insert('todo', title=i.title)  # 其实这里可以不定义变量n 而直接执行db.insert()方法，该方法返回的是出入导数据后改行的行号
         # return render.n(i)
         raise web.seeother('/')
 
